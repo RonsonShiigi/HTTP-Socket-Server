@@ -15,9 +15,15 @@ const server = net.createServer(socket => {
     // console.log(data.toString().split(" ")[0]);
     let method = data.toString().split(" ")[0];
     let address = data.toString().split(" ")[1];
+    let request = data.toString().split(`\r\n`);
+    let m = request[0].split(" ");
+    console.log(data.toString().split(" "));
+    console.log("m[2]", m[2]);
     if (method === "GET") {
       if (address === "/") {
-        socket.write(`HTTP/1.1 \n\n <html>${home}<html>`);
+        socket.write(
+          `HTTP/1.1 \n new Date()` + Date() + `\n\n <html>${home}<html>`
+        );
       } else if (address === "/hydrogen.html") {
         socket.write(`HTTP/1.1 200 OK \n\n <html>${hydrogen}<html>`);
       } else if (address === "/helium.html") {
@@ -35,12 +41,11 @@ const server = net.createServer(socket => {
   });
   //   socket.pipe(socket);
 });
-
+server.listen(8080, "127.0.0.1", () => {
+  console.log("INCOMING");
+});
 server.on("error", err => {
   throw err;
-});
-server.listen(8080, () => {
-  console.log("server bound!");
 });
 
 //http server stuff
