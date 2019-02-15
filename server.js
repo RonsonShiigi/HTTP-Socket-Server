@@ -41,14 +41,14 @@ const server = net.createServer(socket => {
   });
   //   socket.pipe(socket);
 });
-server.listen(8080, "127.0.0.1", () => {
+server.listen(8080, () => {
   console.log("INCOMING");
 });
 server.on("error", err => {
   throw err;
 });
 
-//http server stuff
+//http server stuffasdfad
 
 // const http = require("http");
 
